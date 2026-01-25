@@ -52,7 +52,37 @@
       text-align: center;
       padding: 40px;
       color: #777;
-    }
+    }   
+    footer {
+  text-align: center;
+  padding: 40px;
+  color: #777;
+}
+
+/* animations start here */
+.fade {
+  animation: fadeIn 1s ease forwards;
+}
+
+.hover {
+  transition: transform 0.25s ease;
+}
+
+.hover:hover {
+  transform: translateY(-5px);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
   </style>
 </head>
 <body>
@@ -73,19 +103,25 @@
   </div>
 </section>
 
-<section id="work">
+<section id="work" class="fade">
   <h2>Selected Work</h2>
   <div class="grid">
-    <div class="card">
+
+    <div class="card hover">
+      <img src="draught.png" alt="Draught Logo">
       <strong>DRAUGHT</strong>
       <p>Logo design & visual exploration.</p>
     </div>
-    <div class="card">
+
+    <div class="card hover">
+      <img src="drowned.png" alt="Drowned Poster">
       <strong>DROWNED</strong>
       <p>Concept poster design.</p>
     </div>
+
   </div>
 </section>
+
 
 <section>
   <h2>Skills</h2>
