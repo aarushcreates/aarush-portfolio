@@ -3,372 +3,723 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro RPG Portfolio</title>
+    <title>LVL 5 FREELANCER | Cyberpunk Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
-
         :root {
-            --bg-color: #1a1a2e;
+            --bg-color: #050505;
             --text-color: #e0e0e0;
-            --accent-color: #ff0055;
-            --secondary-color: #00d4ff;
-            --card-bg: #16213e;
-            --border-color: #4a4a6a;
-            --gold: #ffd700;
+            --neon-cyan: #00f3ff;
+            --neon-pink: #ff00ff;
+            --neon-green: #0aff00;
+            --card-bg: rgba(20, 20, 30, 0.8);
+            --font-main: 'VT323', monospace;
+            --font-header: 'Press Start 2P', cursive;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
-
-        body {
-            font-family: 'VT323', monospace;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
             cursor: crosshair;
         }
 
-        /* CRT Scanline Effect */
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            font-size: 1.3rem;
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Moving Grid Background */
         body::before {
-            content: " ";
-            display: block;
+            content: "";
             position: fixed;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
-            z-index: 2;
-            background-size: 100% 2px, 3px 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: 
+                linear-gradient(transparent 95%, var(--neon-pink) 100%),
+                linear-gradient(90deg, transparent 95%, var(--neon-cyan) 100%);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            animation: gridMove 20s linear infinite;
+            opacity: 0.15;
+            z-index: -2;
             pointer-events: none;
         }
 
+        @keyframes gridMove {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+
+        /* CRT Scanline & Vignette */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
+        }
+
+        /* Glitch Animation Keyframes */
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-2deg); }
+            40% { transform: skew(2deg); }
+            60% { transform: skew(0deg); }
+            80% { transform: skew(-1deg); }
+            100% { transform: skew(0deg); }
+        }
+
+        @keyframes glitch-color {
+            0% { text-shadow: 2px 0 var(--neon-cyan), -2px 0 var(--neon-pink); }
+            25% { text-shadow: -2px 0 var(--neon-cyan), 2px 0 var(--neon-pink); }
+            50% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); }
+            75% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); }
+            100% { text-shadow: 2px 0 var(--neon-cyan), -2px 0 var(--neon-pink); }
+        }
+
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text:hover {
+            animation: glitch-skew 0.3s infinite, glitch-color 0.5s infinite;
+        }
+
         h1, h2, h3 {
-            font-family: 'Press Start 2P', cursive;
+            font-family: var(--font-header);
             text-transform: uppercase;
             line-height: 1.4;
         }
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
+        h2 {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        a {
+            color: var(--neon-pink);
+            text-decoration: none;
+            transition: 0.3s;
+            text-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        a:hover {
+            color: #fff;
+            text-shadow: 0 0 15px #fff, 0 0 30px var(--neon-pink);
         }
 
         /* HUD Header */
         header {
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.9);
+            border-bottom: 2px solid var(--neon-cyan);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
-            border-bottom: 4px solid var(--border-color);
-            margin-bottom: 40px;
-            flex-wrap: wrap;
-            gap: 20px;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2);
         }
 
         .player-stats {
             display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 200px;
+            gap: 20px;
+            font-size: 1rem;
+        }
+
+        .stat-label {
+            color: var(--neon-cyan);
+            font-family: var(--font-header);
+            font-size: 0.6rem;
+            margin-bottom: 5px;
+            display: block;
         }
 
         .stat-bar {
             background: #333;
-            height: 20px;
+            border: 2px solid var(--neon-cyan);
+            height: 15px;
+            width: 150px;
             position: relative;
-            border: 2px solid #000;
+            transform: skew(-20deg);
+            box-shadow: 0 0 10px var(--neon-cyan);
         }
 
-        .hp-fill {
-            background: var(--accent-color);
-            width: 85%;
+        .stat-fill {
             height: 100%;
-            animation: pulse 2s infinite;
+            background: var(--neon-pink);
+            width: 80%;
+            box-shadow: 0 0 10px var(--neon-pink);
+            animation: pulse-bar 2s infinite;
         }
 
         .xp-fill {
-            background: var(--secondary-color);
-            width: 60%;
-            height: 100%;
+            background: var(--neon-green);
+            width: 45%;
+            box-shadow: 0 0 10px var(--neon-green);
         }
 
-        .level-badge {
-            font-size: 1.2rem;
-            color: var(--gold);
-            text-shadow: 2px 2px #000;
+        @keyframes pulse-bar {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .class-title {
+            font-family: var(--font-header);
+            font-size: 0.8rem;
+            color: var(--neon-pink);
+            text-align: right;
+            text-shadow: 0 0 8px var(--neon-pink);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
         }
 
         /* Hero Section */
         .hero {
-            text-align: center;
-            padding: 60px 0;
-            animation: fadeIn 1s ease-in;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--secondary-color);
-            text-shadow: 4px 4px #000;
-        }
-
-        .typewriter {
-            font-size: 1.5rem;
-            border-right: 2px solid var(--text-color);
-            white-space: nowrap;
-            overflow: hidden;
-            display: inline-block;
-            animation: blink 0.7s step-end infinite;
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 80px;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 30px;
-            border-left: 10px solid var(--accent-color);
-            padding-left: 20px;
-            color: var(--gold);
-        }
-
-        /* Grid Layouts */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-
-        /* Cards */
-        .card {
-            background: var(--card-bg);
-            border: 4px solid var(--border-color);
-            padding: 20px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            border: 2px solid var(--neon-cyan);
+            padding: 3rem;
+            margin-bottom: 4rem;
+            background: rgba(0, 243, 255, 0.05);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1), inset 0 0 30px rgba(0, 243, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px var(--secondary-color);
-            border-color: var(--secondary-color);
-        }
-
-        .card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 15px;
-            color: var(--secondary-color);
-        }
-
-        .card p {
-            font-size: 1.3rem;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            display: inline-block;
-            background: var(--accent-color);
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
             color: #fff;
-            padding: 10px 20px;
-            text-decoration: none;
-            font-family: 'Press Start 2P', cursive;
+            text-shadow: 3px 3px 0px var(--neon-pink), -1px -1px 0 var(--neon-cyan);
+        }
+
+        .typewriter {
+            border-right: 4px solid var(--neon-green);
+            white-space: nowrap;
+            overflow: hidden;
+            animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+            max-width: fit-content;
+            font-family: var(--font-header);
+            font-size: 1.5rem;
+            color: var(--neon-green);
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--neon-green); }
+        }
+
+        .btn-cyber {
+            margin-top: 2rem;
+            display: inline-block;
+            background: transparent;
+            color: var(--neon-cyan);
+            padding: 1rem 2rem;
+            font-family: var(--font-header);
             font-size: 0.8rem;
-            border: 4px solid #000;
-            box-shadow: 4px 4px 0px #000;
-            transition: all 0.1s;
-            cursor: pointer;
+            border: 2px solid var(--neon-cyan);
+            box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
         }
 
-        .btn:active {
-            transform: translate(4px, 4px);
-            box-shadow: 0px 0px 0px #000;
-        }
-
-        .btn-secondary {
-            background: var(--secondary-color);
+        .btn-cyber:hover {
+            background: var(--neon-cyan);
             color: #000;
+            box-shadow: 0 0 30px var(--neon-cyan), inset 0 0 20px var(--neon-cyan);
+            transform: scale(1.05);
+        }
+
+        .btn-cyber::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-cyber:hover::before {
+            left: 100%;
+        }
+
+        /* Sections */
+        section {
+            margin-bottom: 6rem;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            border-left: 5px solid var(--neon-pink);
+            padding-left: 1rem;
+            background: linear-gradient(90deg, rgba(255, 0, 255, 0.1), transparent);
+            display: inline-block;
+        }
+
+        /* Quest Grid */
+        .quest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .quest-card {
+            background: var(--card-bg);
+            border: 1px solid var(--neon-cyan);
+            padding: 1.5rem;
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quest-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 2px;
+            background: var(--neon-pink);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+
+        .quest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            border-color: var(--neon-pink);
+        }
+
+        .quest-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .quest-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border: 1px solid #333;
+            margin-bottom: 1rem;
+            filter: grayscale(100%) contrast(1.2);
+            transition: filter 0.3s;
+        }
+
+        .quest-card:hover img {
+            filter: grayscale(0%) contrast(1);
+        }
+
+        .quest-tag {
+            background: rgba(255, 0, 255, 0.2);
+            color: var(--neon-pink);
+            border: 1px solid var(--neon-pink);
+            padding: 0.2rem 0.5rem;
+            font-size: 0.7rem;
+            font-family: var(--font-header);
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+
+        /* Mini Game Terminal */
+        .game-terminal {
+            border: 4px double var(--neon-green);
+            background: #000;
+            padding: 1rem;
+            position: relative;
+            box-shadow: 0 0 20px rgba(10, 255, 0, 0.2);
+        }
+
+        .terminal-header {
+            color: var(--neon-green);
+            font-family: var(--font-header);
+            font-size: 0.7rem;
+            border-bottom: 1px dashed var(--neon-green);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        canvas#miniGame {
+            width: 100%;
+            height: 300px;
+            background: #050505;
+            border: 1px solid #333;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .game-controls {
+            text-align: center;
+            margin-top: 1rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .key-badge {
+            display: inline-block;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: var(--font-header);
+            font-size: 0.6rem;
+            margin: 0 2px;
         }
 
         /* Skill Tree */
         .skill-tree {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 1rem;
         }
 
         .skill-node {
-            background: #0f3460;
-            border: 2px solid var(--gold);
-            padding: 10px 20px;
-            font-size: 1.4rem;
-            border-radius: 5px;
-            cursor: help;
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 0.5rem 1rem;
+            font-family: var(--font-header);
+            font-size: 0.7rem;
             transition: 0.3s;
+            box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
         }
 
         .skill-node:hover {
-            background: var(--gold);
+            background: var(--neon-cyan);
             color: #000;
-            box-shadow: 0 0 15px var(--gold);
+            transform: scale(1.1) rotate(-2deg);
+            box-shadow: 0 0 20px var(--neon-cyan);
         }
 
         /* Footer */
         footer {
             text-align: center;
-            padding: 40px 0;
-            border-top: 4px solid var(--border-color);
-            font-size: 1.2rem;
+            padding: 3rem;
+            border-top: 2px solid var(--neon-pink);
+            font-size: 0.9rem;
             opacity: 0.7;
-        }
-
-        /* Animations */
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            background: linear-gradient(0deg, rgba(255,0,255,0.1), transparent);
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             header {
                 flex-direction: column;
-                align-items: flex-start;
+                gap: 1rem;
+                text-align: center;
             }
             .hero h1 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
-            .typewriter {
-                font-size: 1.2rem;
-                white-space: normal;
-                border: none;
-                animation: none;
+            .player-stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .class-title {
+                text-align: center;
+            }
+            .hero {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <!-- HUD Header -->
-        <header>
-            <div class="player-stats">
-                <div class="level-badge">LVL 5 FREELANCER</div>
-                <div class="stat-bar">
-                    <div class="hp-fill"></div>
-                </div>
-                <div style="font-size: 0.8rem;">HP 85/100</div>
-                
-                <div class="stat-bar">
-                    <div class="xp-fill"></div>
-                </div>
-                <div style="font-size: 0.8rem;">XP 60/100</div>
-            </div>
-            <nav>
-                <!-- Simple nav links could go here -->
-            </nav>
-        </header>
+    <!-- CRT Overlay -->
+    <div class="crt-overlay"></div>
 
+    <!-- HUD Header -->
+    <header>
+        <div class="player-stats">
+            <div>
+                <span class="stat-label">INTEGRITY</span>
+                <div class="stat-bar"><div class="stat-fill"></div></div>
+            </div>
+            <div>
+                <span class="stat-label">EXPERIENCE</span>
+                <div class="stat-bar"><div class="stat-fill xp-fill"></div></div>
+            </div>
+        </div>
+        <div class="class-title">
+            LVL 5 FREELANCER
+        </div>
+    </header>
+
+    <div class="container">
+        
         <!-- Hero Section -->
         <section class="hero">
-            <h1>PLAYER ONE</h1>
-            <p class="typewriter">Welcome to my digital realm. I craft interactive experiences and solve bugs like a boss.</p>
-            <br><br>
-            <a href="#quests" class="btn">START QUEST</a>
+            <h1 class="glitch-text">HELLO, PLAYER ONE.</h1>
+            <p style="font-size: 1.5rem; margin-bottom: 1rem; color: #aaa;">I build <span style="color: var(--neon-cyan)">digital experiences</span> and <span style="color: var(--neon-pink)">interactive worlds</span>.</p>
+            <div class="typewriter">SYSTEM READY... WAITING FOR INPUT_</div>
+            <a href="#quests" class="btn-cyber">INITIATE SEQUENCE</a>
+        </section>
+
+        <!-- Mini Game Section -->
+        <section id="arcade">
+            <h2 class="section-title">ARCADE TERMINAL</h2>
+            <div class="game-terminal">
+                <div class="terminal-header">
+                    <span>GAME: NEON DODGER</span>
+                    <span>STATUS: ONLINE</span>
+                </div>
+                <canvas id="miniGame" width="800" height="300"></canvas>
+                <div class="game-controls">
+                    <p>USE <span class="key-badge">←</span> AND <span class="key-badge">→</span> ARROWS TO MOVE</p>
+                    <p id="gameScore" style="color: var(--neon-green); margin-top: 5px;">SCORE: 0 | PRESS SPACE TO START</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Selected Quests (Projects) -->
+        <section id="quests">
+            <h2 class="section-title">SELECTED QUESTS</h2>
+            <div class="quest-grid">
+                
+                <!-- Project 1: Horror Game -->
+                <article class="quest-card">
+                    <span class="quest-tag">[NEW QUEST]</span>
+                    <img src="https://placehold.co/600x400/111/ff00ff?text=HORROR+GAME" alt="Horror Game Screenshot">
+                    <h3 style="color: var(--neon-pink)">Horror Game</h3>
+                    <p>A spooky interactive experience built for the brave.</p>
+                    <br>
+                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem;">PLAY NOW</a>
+                </article>
+
+                <!-- Project 2: Study App -->
+                <article class="quest-card">
+                    <span class="quest-tag">[UTILITY]</span>
+                    <img src="https://placehold.co/600x400/111/00f3ff?text=STUDY+APP" alt="Study App Screenshot">
+                    <h3 style="color: var(--neon-cyan)">Study App</h3>
+                    <p>Boost your productivity with this focused study tool.</p>
+                    <br>
+                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem;">LAUNCH APP</a>
+                </article>
+
+                <!-- Project 3: Original Portfolio -->
+                <article class="quest-card">
+                    <span class="quest-tag">[COMPLETED]</span>
+                    <img src="https://placehold.co/600x400/111/0aff00?text=PORTFOLIO+V1" alt="Portfolio Website">
+                    <h3 style="color: var(--neon-green)">Cyber Portfolio</h3>
+                    <p>This very website! A gamified approach to personal branding.</p>
+                    <br>
+                    <a href="#" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem; opacity: 0.5; cursor: not-allowed;">VIEW SOURCE</a>
+                </article>
+
+            </div>
         </section>
 
         <!-- Class Abilities (Services) -->
         <section id="abilities">
             <h2 class="section-title">CLASS ABILITIES</h2>
-            <div class="grid">
-                <div class="card">
-                    <h3>FRONTEND MAGIC</h3>
-                    <p>Casting HTML, CSS, and JavaScript spells to create responsive UIs.</p>
-                </div>
-                <div class="card">
-                    <h3>UI/UX ALCHEMY</h3>
-                    <p>Transforming complex problems into intuitive user interfaces.</p>
-                </div>
-                <div class="card">
-                    <h3>BUG SLAYING</h3>
-                    <p>Hunting down errors and optimizing performance for maximum FPS.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Selected Quests (Portfolio) -->
-        <section id="quests">
-            <h2 class="section-title">SELECTED QUESTS</h2>
-            <div class="grid">
-                <!-- Existing Project 1 -->
-                <div class="card">
-                    <h3>E-COMMERCE DUNGEON</h3>
-                    <p>A full-stack shopping platform built with React and Node.js.</p>
-                    <a href="#" class="btn btn-secondary">VIEW LOOT</a>
-                </div>
-
-                <!-- Existing Project 2 -->
-                <div class="card">
-                    <h3>DASHBOARD FORTRESS</h3>
-                    <p>Data visualization dashboard for analytics tracking.</p>
-                    <a href="#" class="btn btn-secondary">ENTER BASE</a>
-                </div>
-
-                <!-- NEW PROJECT 1: Game -->
-                <div class="card">
-                    <h3>QUEST: HORROR GAME</h3>
-                    <p>A spooky interactive experience. Do you dare to enter?</p>
-                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="btn">PLAY NOW</a>
-                </div>
-
-                <!-- NEW PROJECT 2: Study App -->
-                <div class="card">
-                    <h3>QUEST: STUDY APP</h3>
-                    <p>An intelligent tool to boost your learning stats.</p>
-                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="btn">LAUNCH APP</a>
-                </div>
-            </div>
+            <ul style="list-style: square inside; font-size: 1.5rem; color: #ccc;">
+                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Frontend Development (HTML/CSS/JS)</li>
+                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> UI/UX Design & Prototyping</li>
+                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Interactive Web Experiences</li>
+                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Responsive Layouts</li>
+            </ul>
         </section>
 
         <!-- Skill Tree -->
         <section id="skills">
             <h2 class="section-title">SKILL TREE</h2>
             <div class="skill-tree">
-                <div class="skill-node">JavaScript (ES6+)</div>
-                <div class="skill-node">React.js</div>
+                <div class="skill-node">JavaScript</div>
+                <div class="skill-node">React</div>
+                <div class="skill-node">CSS3</div>
+                <div class="skill-node">HTML5</div>
+                <div class="skill-node">Git</div>
+                <div class="skill-node">Figma</div>
                 <div class="skill-node">Node.js</div>
-                <div class="skill-node">Python</div>
-                <div class="skill-node">SQL / NoSQL</div>
-                <div class="skill-node">Git Control</div>
-                <div class="skill-node">CSS Grid/Flex</div>
                 <div class="skill-node">Three.js</div>
+                <div class="skill-node">Canvas API</div>
             </div>
         </section>
 
-        <footer>
-            <p>© 2023 Player One. All Rights Reserved.</p>
-            <p style="font-size: 0.8rem; margin-top: 10px;">Press Start to Continue...</p>
-        </footer>
+        <!-- Contact / Final Boss -->
+        <section id="contact" style="text-align: center; border: 2px solid var(--neon-pink); padding: 3rem; background: rgba(255, 0, 255, 0.05); box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);">
+            <h2 style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); margin-bottom: 1rem;">CHALLENGE THE FINAL BOSS?</h2>
+            <p style="margin-bottom: 2rem; font-size: 1.4rem;">Ready to start a new quest together? Send a transmission.</p>
+            <a href="mailto:your-email@example.com" class="btn-cyber">SEND MESSAGE</a>
+        </section>
+
     </div>
 
+    <footer>
+        <p>© 2024 LVL 5 FREELANCER. ALL RIGHTS RESERVED.</p>
+        <p style="color: var(--neon-green); margin-top: 10px;">SYSTEM ONLINE... PRESS START TO CONTINUE...</p>
+    </footer>
+
+    <!-- Mini Game Script -->
+    <script>
+        const canvas = document.getElementById('miniGame');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('gameScore');
+        
+        let gameRunning = false;
+        let score = 0;
+        let player = { x: 400, y: 250, w: 30, h: 30, speed: 5, dx: 0 };
+        let obstacles = [];
+        let frameCount = 0;
+        let animationId;
+
+        // Input Handling
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' && !gameRunning) {
+                startGame();
+            }
+            if (e.code === 'ArrowRight') player.dx = player.speed;
+            if (e.code === 'ArrowLeft') player.dx = -player.speed;
+        });
+
+        document.addEventListener('keyup', (e) => {
+            if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
+                player.dx = 0;
+            }
+        });
+
+        function startGame() {
+            gameRunning = true;
+            score = 0;
+            obstacles = [];
+            player.x = canvas.width / 2 - 15;
+            frameCount = 0;
+            scoreEl.innerText = "SCORE: 0 | PLAYING...";
+            if (animationId) cancelAnimationFrame(animationId);
+            update();
+        }
+
+        function drawPlayer() {
+            ctx.fillStyle = '#00f3ff';
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#00f3ff';
+            ctx.fillRect(player.x, player.y, player.w, player.h);
+            ctx.shadowBlur = 0;
+        }
+
+        function drawObstacles() {
+            ctx.fillStyle = '#ff00ff';
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#ff00ff';
+            obstacles.forEach(obs => {
+                ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+            });
+            ctx.shadowBlur = 0;
+        }
+
+        function update() {
+            if (!gameRunning) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Move Player
+            player.x += player.dx;
+            // Boundary Check
+            if (player.x < 0) player.x = 0;
+            if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+
+            // Spawn Obstacles
+            frameCount++;
+            if (frameCount % 40 === 0) { // Spawn rate
+                let size = Math.random() * 30 + 20;
+                obstacles.push({
+                    x: Math.random() * (canvas.width - size),
+                    y: -50,
+                    w: size,
+                    h: size,
+                    speed: 3 + (score * 0.1) // Get faster as score increases
+                });
+            }
+
+            // Move & Draw Obstacles
+            for (let i = 0; i < obstacles.length; i++) {
+                let obs = obstacles[i];
+                obs.y += obs.speed;
+                
+                // Collision Detection
+                if (
+                    player.x < obs.x + obs.w &&
+                    player.x + player.w > obs.x &&
+                    player.y < obs.y + obs.h &&
+                    player.y + player.h > obs.y
+                ) {
+                    gameOver();
+                    return;
+                }
+
+                // Remove off-screen obstacles and increase score
+                if (obs.y > canvas.height) {
+                    obstacles.splice(i, 1);
+                    score++;
+                    i--;
+                }
+            }
+
+            drawPlayer();
+            drawObstacles();
+
+            scoreEl.innerText = `SCORE: ${score} | PLAYING...`;
+            animationId = requestAnimationFrame(update);
+        }
+
+        function gameOver() {
+            gameRunning = false;
+            ctx.fillStyle = 'rgba(0,0,0,0.7)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#ff0000';
+            ctx.font = '20px "Press Start 2P"';
+            ctx.textAlign = 'center';
+            ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 - 20);
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px "VT323"';
+            ctx.fillText(`FINAL SCORE: ${score}`, canvas.width/2, canvas.height/2 + 10);
+            ctx.fillText("PRESS SPACE TO RESTART", canvas.width/2, canvas.height/2 + 40);
+            
+            scoreEl.innerText = `GAME OVER | SCORE: ${score} | PRESS SPACE TO RESTART`;
+        }
+
+        // Initial Draw
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#0aff00';
+        ctx.font = '14px "VT323"';
+        ctx.textAlign = 'center';
+        ctx.fillText("PRESS SPACE TO START GAME", canvas.width/2, canvas.height/2);
+    </script>
 </body>
 </html>
