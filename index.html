@@ -3,156 +3,399 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aarush Singh — Portfolio</title>
+  <title>Aarush Singh — Level 1 Designer</title>
   <!-- Social Preview -->
-<meta property="og:title" content="Aarush Singh — Portfolio" />
-<meta property="og:description" content="Graphic Design • Logos • Video Editing" />
-<meta property="og:image" content="https://aarushcreates.github.io/aarush-portfolio/preview.png" />
-<meta property="og:url" content="https://aarushcreates.github.io/aarush-portfolio/" />
-<meta property="og:type" content="website" />
-
-<!-- Twitter Preview -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Aarush Singh — Portfolio" />
-<meta name="twitter:description" content="Graphic Design • Logos • Video Editing" />
-<meta name="twitter:image" content="https://aarushcreates.github.io/aarush-portfolio/preview.png" />
-
+  <meta property="og:title" content="Aarush Singh — Portfolio" />
+  <meta property="og:description" content="Graphic Design • Logos • Video Editing" />
+  <meta property="og:image" content="https://aarushcreates.github.io/aarush-portfolio/preview.png" />
+  <meta property="og:url" content="https://aarushcreates.github.io/aarush-portfolio/" />
+  <meta property="og:type" content="website" />
+  
+  <!-- Twitter Preview -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aarush Singh — Portfolio" />
+  <meta name="twitter:description" content="Graphic Design • Logos • Video Editing" />
+  <meta name="twitter:image" content="https://aarushcreates.github.io/aarush-portfolio/preview.png" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --bg-color: #1a1a2e;
+      --text-color: #e0e0e0;
+      --accent-color: #0f3460;
+      --highlight-color: #e94560;
+      --green-color: #4caf50;
+      --gold-color: #ffd700;
+      --font-main: 'VT323', monospace;
+      --font-header: 'Press Start 2P', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      cursor: crosshair; /* Game-like cursor */
+    }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0b0b0b;
-      color: #f5f5f5;
+      font-family: var(--font-main);
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      font-size: 1.2rem;
+      line-height: 1.6;
     }
+
+    /* Scanline effect */
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+      background-size: 100% 2px, 3px 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* HUD Header */
     header {
-      padding: 80px 20px;
-      text-align: center;
+      padding: 20px;
+      border-bottom: 4px solid var(--accent-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      background: #16213e;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
+
+    .player-stats {
+      display: flex;
+      gap: 15px;
+      font-size: 1rem;
+    }
+
+    .stat-box {
+      background: #000;
+      border: 2px solid var(--text-color);
+      padding: 5px 10px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .hp-bar {
+      width: 100px;
+      height: 10px;
+      background: #333;
+      border: 1px solid #fff;
+      position: relative;
+    }
+
+    .hp-fill {
+      width: 100%;
+      height: 100%;
+      background: var(--highlight-color);
+      animation: pulse 2s infinite;
+    }
+
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-family: var(--font-header);
+      font-size: 1.2rem;
+      color: var(--gold-color);
+      text-shadow: 2px 2px #000;
+      margin: 0;
     }
-    p {
-      color: #bdbdbd;
-      max-width: 600px;
-      margin: 0 auto 30px;
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
     }
+
     .btn {
-      display: inline-block;
-      padding: 12px 24px;
-      border: 1px solid #3b82f6;
-      color: #3b82f6;
+      font-family: var(--font-header);
+      font-size: 0.6rem;
+      padding: 10px 15px;
+      border: 4px solid var(--text-color);
+      background: transparent;
+      color: var(--text-color);
       text-decoration: none;
-      border-radius: 6px;
-      margin: 5px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      box-shadow: 4px 4px 0px #000;
     }
+
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #000;
+      background: var(--accent-color);
+      color: #fff;
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 0px 0px 0px #000;
+    }
+
     section {
-  padding: 60px 20px;
-  max-width: 1200px;
-  margin: auto;
-}
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      position: relative;
+    }
+
+    .section-title {
+      font-family: var(--font-header);
+      font-size: 1.5rem;
+      color: var(--highlight-color);
+      border-left: 5px solid var(--gold-color);
+      padding-left: 15px;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+    }
+
+    /* Quest Grid */
     .grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
-}
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+
     .card {
-  background: #141414;
-  padding: 20px;
-  border-radius: 12px;
-  max-width: 420px;
-  margin: auto;
-  }  
-    
-  .card img {
-  width: 100%;
-  height: 280px;
-  object-fit: cover;
-  border-radius: 8px;
-}
+      background: #16213e;
+      border: 4px solid #000;
+      padding: 15px;
+      border-radius: 0;
+      position: relative;
+      transition: transform 0.3s;
+      box-shadow: 8px 8px 0px rgba(0,0,0,0.5);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--gold-color);
+      z-index: 10;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border: 2px solid #000;
+      image-rendering: pixelated;
+    }
+
+    .card strong {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.4rem;
+      color: var(--gold-color);
+      font-family: var(--font-header);
+      font-size: 0.8rem;
+    }
+
+    .card p {
+      font-size: 1.1rem;
+      color: #aaa;
+    }
+
+    /* Skill Tree */
+    .skill-tree {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .skill-node {
+      background: #000;
+      border: 2px solid var(--green-color);
+      color: var(--green-color);
+      padding: 10px 20px;
+      font-family: var(--font-header);
+      font-size: 0.7rem;
+      position: relative;
+      transition: 0.3s;
+    }
+
+    .skill-node:hover {
+      background: var(--green-color);
+      color: #000;
+      box-shadow: 0 0 15px var(--green-color);
+    }
+
     footer {
       text-align: center;
       padding: 40px;
-      color: #777;
-    }   
-    footer {
-  text-align: center;
-  padding: 40px;
-  color: #777;
-}
+      color: #555;
+      border-top: 4px solid var(--accent-color);
+      margin-top: 50px;
+      font-family: var(--font-header);
+      font-size: 0.6rem;
+    }
 
-/* animations start here */
-.fade {
-  animation: fadeIn 1s ease forwards;
-}
+    /* Animations */
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
+    }
 
-.hover {
-  transition: transform 0.25s ease;
-}
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid var(--highlight-color);
+      white-space: nowrap;
+      margin: 0;
+      letter-spacing: .15em;
+      animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+      max-width: fit-content;
+    }
 
-.hover:hover {
-  transform: translateY(-5px);
-}
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: var(--highlight-color); }
+    }
 
+    /* Mobile Adjustments */
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+      }
+      .player-stats {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      h1 {
+        font-size: 1rem;
+      }
+      .btn {
+        font-size: 0.5rem;
+        padding: 8px 10px;
+      }
+    }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>Aarush Singh</h1>
-  <p>Bold visuals for brands that want attention.</p>
-  <a class="btn" href="#work">View Work</a>
-  <a class="btn" href="mailto:aarushsingho1157@gmail.com">Contact</a>
+  <div class="player-info">
+    <h1>AARUSH SINGH</h1>
+    <div style="font-size: 0.8rem; color: #aaa;">LVL 5 GRAPHIC DESIGNER</div>
+  </div>
+  
+  <div class="player-stats">
+    <div class="stat-box">
+      <span>HP</span>
+      <div class="hp-bar"><div class="hp-fill"></div></div>
+    </div>
+    <div class="stat-box">
+      <span>XP</span>
+      <span style="color: var(--gold-color)">2450/3000</span>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
+    <a class="btn" href="#quests">Quests</a>
+    <a class="btn" href="#skills">Skills</a>
+    <a class="btn" href="mailto:aarushsingho1157@gmail.com">Contact</a>
+  </div>
 </header>
 
-<section>
-  <h2>Services</h2>
-  <div class="grid">
-    <div class="card">Video Editing</div>
-    <div class="card">Graphic Design</div>
-    <div class="card">Logo Design</div>
-  </div>
+<section id="intro">
+  <h2 class="section-title">Mission Briefing</h2>
+  <p class="typewriter" style="font-size: 1.5rem; color: #fff;">Bold visuals for brands that want attention.</p>
+  <br>
+  <p>Select a quest below to view my portfolio items.</p>
 </section>
 
-<section id="work" class="fade">
-  <h2>Selected Work</h2>
+<section id="quests">
+  <h2 class="section-title">Selected Quests</h2>
   <div class="grid">
 
-    <div class="card hover">
+    <div class="card">
       <img src="draught.png" alt="Draught Logo">
-      <strong>DRAUGHT</strong>
-      <p>Logo design & visual exploration.</p>
+      <strong>QUEST: DRAUGHT</strong>
+      <p>Objective: Logo design & visual exploration.</p>
+      <div style="margin-top:10px; font-size: 0.8rem; color: var(--gold-color);">[COMPLETED]</div>
     </div>
 
-    <div class="card hover">
+    <div class="card">
       <img src="drowned.png" alt="Drowned Poster">
-      <strong>DROWNED</strong>
-      <p>Concept poster design.</p>
+      <strong>QUEST: DROWNED</strong>
+      <p>Objective: Concept poster design.</p>
+      <div style="margin-top:10px; font-size: 0.8rem; color: var(--gold-color);">[COMPLETED]</div>
     </div>
 
   </div>
 </section>
 
+<section id="services">
+  <h2 class="section-title">Class Abilities</h2>
+  <div class="grid">
+    <div class="card" style="border-color: var(--highlight-color);">
+      <strong>VIDEO EDITING</strong>
+      <p>Cutting timelines and crafting stories.</p>
+    </div>
+    <div class="card" style="border-color: var(--highlight-color);">
+      <strong>GRAPHIC DESIGN</strong>
+      <p>Visual communication mastery.</p>
+    </div>
+    <div class="card" style="border-color: var(--highlight-color);">
+      <strong>LOGO DESIGN</strong>
+      <p>Brand identity forging.</p>
+    </div>
+  </div>
+</section>
 
-<section>
-  <h2>Skills</h2>
-  <p>Photoshop · Illustrator · Premiere Pro · Branding · Typography</p>
+<section id="skills">
+  <h2 class="section-title">Skill Tree</h2>
+  <div class="skill-tree">
+    <div class="skill-node">PHOTOSHOP</div>
+    <div class="skill-node">ILLUSTRATOR</div>
+    <div class="skill-node">PREMIERE PRO</div>
+    <div class="skill-node">BRANDING</div>
+    <div class="skill-node">TYPOGRAPHY</div>
+    <div class="skill-node">MOTION GFX</div>
+  </div>
 </section>
 
 <footer>
-  © 2026 Aarush Singh
+  © 2026 AARUSH SINGH. ALL RIGHTS RESERVED.<br>
+  <span style="font-size: 0.5rem; color: #444;">PRESS START TO CONTINUE</span>
 </footer>
+
+<script>
+  // Simple interaction script
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      // Could add sound effect here later
+      console.log('Item hovered');
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
