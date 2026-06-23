@@ -3,723 +3,758 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LVL 5 FREELANCER | Cyberpunk Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <title>Aarush - Portfolio</title>
     <style>
-        :root {
-            --bg-color: #050505;
-            --text-color: #e0e0e0;
-            --neon-cyan: #00f3ff;
-            --neon-pink: #ff00ff;
-            --neon-green: #0aff00;
-            --card-bg: rgba(20, 20, 30, 0.8);
-            --font-main: 'VT323', monospace;
-            --font-header: 'Press Start 2P', cursive;
-        }
-
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            cursor: crosshair;
+            box-sizing: border-box;
         }
+
+        @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Russo+One&display=swap');
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: var(--font-main);
-            font-size: 1.3rem;
-            line-height: 1.6;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Moving Grid Background */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                linear-gradient(transparent 95%, var(--neon-pink) 100%),
-                linear-gradient(90deg, transparent 95%, var(--neon-cyan) 100%);
-            background-size: 40px 40px;
-            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
-            animation: gridMove 20s linear infinite;
-            opacity: 0.15;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        @keyframes gridMove {
-            0% { background-position: 0 0; }
-            100% { background-position: 0 1000px; }
-        }
-
-        /* CRT Scanline & Vignette */
-        .crt-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.4) 50%);
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 999;
-            box-shadow: inset 0 0 100px rgba(0,0,0,0.9);
-        }
-
-        /* Glitch Animation Keyframes */
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            20% { transform: skew(-2deg); }
-            40% { transform: skew(2deg); }
-            60% { transform: skew(0deg); }
-            80% { transform: skew(-1deg); }
-            100% { transform: skew(0deg); }
-        }
-
-        @keyframes glitch-color {
-            0% { text-shadow: 2px 0 var(--neon-cyan), -2px 0 var(--neon-pink); }
-            25% { text-shadow: -2px 0 var(--neon-cyan), 2px 0 var(--neon-pink); }
-            50% { text-shadow: 2px 0 var(--neon-pink), -2px 0 var(--neon-cyan); }
-            75% { text-shadow: -2px 0 var(--neon-pink), 2px 0 var(--neon-cyan); }
-            100% { text-shadow: 2px 0 var(--neon-cyan), -2px 0 var(--neon-pink); }
-        }
-
-        .glitch-text {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .glitch-text:hover {
-            animation: glitch-skew 0.3s infinite, glitch-color 0.5s infinite;
-        }
-
-        h1, h2, h3 {
-            font-family: var(--font-header);
-            text-transform: uppercase;
-            line-height: 1.4;
-        }
-
-        h2 {
-            color: var(--neon-cyan);
-            text-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        a {
-            color: var(--neon-pink);
-            text-decoration: none;
-            transition: 0.3s;
-            text-shadow: 0 0 5px var(--neon-pink);
-        }
-
-        a:hover {
+            font-family: 'Russo One', sans-serif;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0d1117 100%);
+            min-height: 100vh;
             color: #fff;
-            text-shadow: 0 0 15px #fff, 0 0 30px var(--neon-pink);
         }
 
-        /* HUD Header */
-        header {
-            position: sticky;
+        .bg-particles {
+            position: fixed;
             top: 0;
-            background: rgba(5, 5, 5, 0.9);
-            border-bottom: 2px solid var(--neon-cyan);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 5px 20px rgba(0, 243, 255, 0.2);
-        }
-
-        .player-stats {
-            display: flex;
-            gap: 20px;
-            font-size: 1rem;
-        }
-
-        .stat-label {
-            color: var(--neon-cyan);
-            font-family: var(--font-header);
-            font-size: 0.6rem;
-            margin-bottom: 5px;
-            display: block;
-        }
-
-        .stat-bar {
-            background: #333;
-            border: 2px solid var(--neon-cyan);
-            height: 15px;
-            width: 150px;
-            position: relative;
-            transform: skew(-20deg);
-            box-shadow: 0 0 10px var(--neon-cyan);
-        }
-
-        .stat-fill {
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: var(--neon-pink);
-            width: 80%;
-            box-shadow: 0 0 10px var(--neon-pink);
-            animation: pulse-bar 2s infinite;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
         }
 
-        .xp-fill {
-            background: var(--neon-green);
-            width: 45%;
-            box-shadow: 0 0 10px var(--neon-green);
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: rgba(100, 200, 255, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite;
         }
 
-        @keyframes pulse-bar {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
         }
 
-        .class-title {
-            font-family: var(--font-header);
-            font-size: 0.8rem;
-            color: var(--neon-pink);
-            text-align: right;
-            text-shadow: 0 0 8px var(--neon-pink);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem;
+        .main-container {
+            display: flex;
+            height: 100vh;
             position: relative;
             z-index: 1;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 80vh;
+        .left-side {
+            width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            border: 2px solid var(--neon-cyan);
-            padding: 3rem;
-            margin-bottom: 4rem;
-            background: rgba(0, 243, 255, 0.05);
-            box-shadow: 0 0 30px rgba(0, 243, 255, 0.1), inset 0 0 30px rgba(0, 243, 255, 0.1);
+            padding-left: 80px;
+            background: linear-gradient(90deg, rgba(10, 14, 26, 0.9) 0%, rgba(10, 14, 26, 0.7) 100%);
             position: relative;
-            overflow: hidden;
         }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #fff;
-            text-shadow: 3px 3px 0px var(--neon-pink), -1px -1px 0 var(--neon-cyan);
-        }
-
-        .typewriter {
-            border-right: 4px solid var(--neon-green);
-            white-space: nowrap;
-            overflow: hidden;
-            animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
-            max-width: fit-content;
-            font-family: var(--font-header);
-            font-size: 1.5rem;
-            color: var(--neon-green);
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: var(--neon-green); }
-        }
-
-        .btn-cyber {
-            margin-top: 2rem;
-            display: inline-block;
-            background: transparent;
-            color: var(--neon-cyan);
-            padding: 1rem 2rem;
-            font-family: var(--font-header);
-            font-size: 0.8rem;
-            border: 2px solid var(--neon-cyan);
-            box-shadow: 0 0 10px var(--neon-cyan), inset 0 0 10px var(--neon-cyan);
-            transition: all 0.2s;
+        .logo-container {
+            margin-bottom: 60px;
             position: relative;
-            overflow: hidden;
+        }
+
+        .logo {
+            font-family: 'Metal Mania', cursive;
+            font-size: 5rem;
             text-transform: uppercase;
-        }
-
-        .btn-cyber:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            box-shadow: 0 0 30px var(--neon-cyan), inset 0 0 20px var(--neon-cyan);
-            transform: scale(1.05);
-        }
-
-        .btn-cyber::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-cyber:hover::before {
-            left: 100%;
-        }
-
-        /* Sections */
-        section {
-            margin-bottom: 6rem;
-        }
-
-        .section-title {
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            border-left: 5px solid var(--neon-pink);
-            padding-left: 1rem;
-            background: linear-gradient(90deg, rgba(255, 0, 255, 0.1), transparent);
+            letter-spacing: 8px;
+            position: relative;
             display: inline-block;
         }
 
-        /* Quest Grid */
-        .quest-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .quest-card {
-            background: var(--card-bg);
-            border: 1px solid var(--neon-cyan);
-            padding: 1.5rem;
-            transition: all 0.3s;
+        .logo-text {
+            background: linear-gradient(180deg, #e8e8e8 0%, #a0a0a0 30%, #606060 60%, #404040 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
             position: relative;
-            overflow: hidden;
+            z-index: 2;
         }
 
-        .quest-card::after {
+        .logo::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 2px;
-            background: var(--neon-pink);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 80%;
+            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.4) 0%, transparent 70%);
+            z-index: 1;
+            filter: blur(20px);
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 140%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+            z-index: 0;
+            filter: blur(30px);
+        }
+
+        .wing-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 100px;
+            z-index: 0;
+        }
+
+        .wing-left {
+            position: absolute;
+            left: -80px;
+            top: 20px;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(220, 20, 60, 0.6) 0%, rgba(0, 255, 255, 0.4) 100%);
+            clip-path: polygon(0 50%, 100% 0, 80% 50%, 100% 100%);
+            filter: blur(10px);
+            animation: wingPulse 2s ease-in-out infinite;
+        }
+
+        .wing-right {
+            position: absolute;
+            right: -80px;
+            top: 20px;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(225deg, rgba(220, 20, 60, 0.6) 0%, rgba(0, 255, 255, 0.4) 100%);
+            clip-path: polygon(0 0, 100% 50%, 20% 50%, 0 100%);
+            filter: blur(10px);
+            animation: wingPulse 2s ease-in-out infinite reverse;
+        }
+
+        @keyframes wingPulse {
+            0%, 100% { opacity: 0.6; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(1.1); }
+        }
+
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .menu-btn {
+            font-family: 'Russo One', sans-serif;
+            font-size: 2rem;
+            color: #fff;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            padding: 15px 40px;
+            position: relative;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .menu-btn::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #dc143c, #00ffff);
+            transition: width 0.3s ease;
+        }
+
+        .menu-btn::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
             transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
+            transition: transform 0.3s ease;
         }
 
-        .quest-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-            border-color: var(--neon-pink);
+        .menu-btn:hover {
+            color: #00ffff;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+            padding-left: 50px;
         }
 
-        .quest-card:hover::after {
+        .menu-btn:hover::before {
+            width: 100%;
+        }
+
+        .menu-btn:hover::after {
             transform: scaleX(1);
         }
 
-        .quest-card img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border: 1px solid #333;
-            margin-bottom: 1rem;
-            filter: grayscale(100%) contrast(1.2);
-            transition: filter 0.3s;
-        }
-
-        .quest-card:hover img {
-            filter: grayscale(0%) contrast(1);
-        }
-
-        .quest-tag {
-            background: rgba(255, 0, 255, 0.2);
-            color: var(--neon-pink);
-            border: 1px solid var(--neon-pink);
-            padding: 0.2rem 0.5rem;
-            font-size: 0.7rem;
-            font-family: var(--font-header);
-            display: inline-block;
-            margin-bottom: 0.5rem;
-            box-shadow: 0 0 5px var(--neon-pink);
-        }
-
-        /* Mini Game Terminal */
-        .game-terminal {
-            border: 4px double var(--neon-green);
-            background: #000;
-            padding: 1rem;
+        .right-side {
+            width: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(90deg, rgba(10, 14, 26, 0.7) 0%, rgba(10, 14, 26, 0.9) 100%);
             position: relative;
-            box-shadow: 0 0 20px rgba(10, 255, 0, 0.2);
+            overflow: hidden;
         }
 
-        .terminal-header {
-            color: var(--neon-green);
-            font-family: var(--font-header);
-            font-size: 0.7rem;
-            border-bottom: 1px dashed var(--neon-green);
-            padding-bottom: 0.5rem;
-            margin-bottom: 1rem;
-            display: flex;
-            justify-content: space-between;
+        #gameCanvas {
+            border: 3px solid rgba(0, 255, 255, 0.3);
+            background: linear-gradient(180deg, #0a0e1a 0%, #1a2332 100%);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
         }
 
-        canvas#miniGame {
+        .game-instructions {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-align: right;
+        }
+
+        .loadout-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 300px;
-            background: #050505;
-            border: 1px solid #333;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.5s ease;
+            overflow-y: auto;
+        }
+
+        .loadout-screen.active {
             display: block;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .loadout-content {
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 60px 40px;
         }
 
-        .game-controls {
+        .loadout-title {
+            font-family: 'Metal Mania', cursive;
+            font-size: 3.5rem;
             text-align: center;
-            margin-top: 1rem;
-            color: #888;
-            font-size: 0.9rem;
+            margin-bottom: 40px;
+            background: linear-gradient(180deg, #e8e8e8 0%, #a0a0a0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .key-badge {
+        .about-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 5px;
+        }
+
+        .about-section h2 {
+            font-size: 1.8rem;
+            color: #00ffff;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .about-section p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .projects-section {
+            margin-bottom: 40px;
+        }
+
+        .projects-section h2 {
+            font-size: 1.8rem;
+            color: #dc143c;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(220, 20, 60, 0.3);
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            border-color: #dc143c;
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
+            transform: translateX(10px);
+        }
+
+        .project-card h3 {
+            font-size: 1.4rem;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        .project-card a {
             display: inline-block;
-            border: 1px solid var(--neon-green);
-            color: var(--neon-green);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: var(--font-header);
-            font-size: 0.6rem;
-            margin: 0 2px;
+            color: #00ffff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 8px 20px;
+            border: 1px solid #00ffff;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
-        /* Skill Tree */
-        .skill-tree {
+        .project-card a:hover {
+            background: #00ffff;
+            color: #0a0e1a;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        }
+
+        .back-btn {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.3rem;
+            color: #fff;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 15px 50px;
+            display: block;
+            margin: 40px auto 0;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            border-color: #dc143c;
+            color: #dc143c;
+            box-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 200;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
             display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
         }
 
-        .skill-node {
-            background: rgba(0, 243, 255, 0.1);
-            border: 1px solid var(--neon-cyan);
-            color: var(--neon-cyan);
-            padding: 0.5rem 1rem;
-            font-family: var(--font-header);
-            font-size: 0.7rem;
-            transition: 0.3s;
-            box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
-        }
-
-        .skill-node:hover {
-            background: var(--neon-cyan);
-            color: #000;
-            transform: scale(1.1) rotate(-2deg);
-            box-shadow: 0 0 20px var(--neon-cyan);
-        }
-
-        /* Footer */
-        footer {
+        .contact-modal {
+            background: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(26, 31, 46, 0.95) 100%);
+            border: 2px solid rgba(220, 20, 60, 0.5);
+            padding: 50px;
+            border-radius: 10px;
             text-align: center;
-            padding: 3rem;
-            border-top: 2px solid var(--neon-pink);
-            font-size: 0.9rem;
-            opacity: 0.7;
-            background: linear-gradient(0deg, rgba(255,0,255,0.1), transparent);
+            box-shadow: 0 0 50px rgba(220, 20, 60, 0.3);
+            max-width: 400px;
+            width: 90%;
         }
 
-        /* Responsive */
+        .contact-modal h2 {
+            font-family: 'Metal Mania', cursive;
+            font-size: 2.5rem;
+            color: #dc143c;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.3rem;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 5px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+
+        .contact-link svg {
+            width: 30px;
+            height: 30px;
+            fill: #dc143c;
+        }
+
+        .close-btn {
+            font-family: 'Russo One', sans-serif;
+            font-size: 1.2rem;
+            color: #fff;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            padding: 12px 40px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            border-color: #dc143c;
+            color: #dc143c;
+        }
+
+        .fade-out {
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
         @media (max-width: 768px) {
-            header {
+            .main-container {
                 flex-direction: column;
-                gap: 1rem;
-                text-align: center;
             }
-            .hero h1 {
-                font-size: 1.8rem;
+
+            .left-side, .right-side {
+                width: 100%;
+                height: 50vh;
             }
-            .player-stats {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
+
+            .left-side {
+                padding-left: 30px;
+                justify-content: flex-start;
+                padding-top: 40px;
             }
-            .class-title {
-                text-align: center;
+
+            .logo {
+                font-size: 3.5rem;
             }
-            .hero {
-                padding: 1.5rem;
+
+            .menu-btn {
+                font-size: 1.5rem;
+                padding: 10px 30px;
+            }
+
+            #gameCanvas {
+                width: 90%;
+                height: 70%;
+            }
+
+            .game-instructions {
+                font-size: 0.6rem;
+                bottom: 10px;
+                right: 10px;
+            }
+
+            .loadout-content {
+                padding: 30px 20px;
+            }
+
+            .loadout-title {
+                font-size: 2.5rem;
+            }
+
+            .contact-modal {
+                padding: 30px 20px;
             }
         }
     </style>
 </head>
 <body>
+    <div class="bg-particles" id="bgParticles"></div>
 
-    <!-- CRT Overlay -->
-    <div class="crt-overlay"></div>
-
-    <!-- HUD Header -->
-    <header>
-        <div class="player-stats">
-            <div>
-                <span class="stat-label">INTEGRITY</span>
-                <div class="stat-bar"><div class="stat-fill"></div></div>
+    <div class="main-container" id="mainContainer">
+        <div class="left-side">
+            <div class="logo-container">
+                <div class="wing-effect">
+                    <div class="wing-left"></div>
+                    <div class="wing-right"></div>
+                </div>
+                <h1 class="logo">
+                    <span class="logo-text">AARUSH</span>
+                </h1>
             </div>
-            <div>
-                <span class="stat-label">EXPERIENCE</span>
-                <div class="stat-bar"><div class="stat-fill xp-fill"></div></div>
+            <div class="menu-buttons">
+                <button class="menu-btn" onclick="showLoadout()">START</button>
+                <button class="menu-btn" onclick="showContact()">CONTACT</button>
             </div>
         </div>
-        <div class="class-title">
-            LVL 5 FREELANCER
+
+        <div class="right-side">
+            <canvas id="gameCanvas"></canvas>
+            <div class="game-instructions">
+                TAP or SPACE to Jump
+            </div>
         </div>
-    </header>
-
-    <div class="container">
-        
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1 class="glitch-text">HELLO, PLAYER ONE.</h1>
-            <p style="font-size: 1.5rem; margin-bottom: 1rem; color: #aaa;">I build <span style="color: var(--neon-cyan)">digital experiences</span> and <span style="color: var(--neon-pink)">interactive worlds</span>.</p>
-            <div class="typewriter">SYSTEM READY... WAITING FOR INPUT_</div>
-            <a href="#quests" class="btn-cyber">INITIATE SEQUENCE</a>
-        </section>
-
-        <!-- Mini Game Section -->
-        <section id="arcade">
-            <h2 class="section-title">ARCADE TERMINAL</h2>
-            <div class="game-terminal">
-                <div class="terminal-header">
-                    <span>GAME: NEON DODGER</span>
-                    <span>STATUS: ONLINE</span>
-                </div>
-                <canvas id="miniGame" width="800" height="300"></canvas>
-                <div class="game-controls">
-                    <p>USE <span class="key-badge">←</span> AND <span class="key-badge">→</span> ARROWS TO MOVE</p>
-                    <p id="gameScore" style="color: var(--neon-green); margin-top: 5px;">SCORE: 0 | PRESS SPACE TO START</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Selected Quests (Projects) -->
-        <section id="quests">
-            <h2 class="section-title">SELECTED QUESTS</h2>
-            <div class="quest-grid">
-                
-                <!-- Project 1: Horror Game -->
-                <article class="quest-card">
-                    <span class="quest-tag">[NEW QUEST]</span>
-                    <img src="https://placehold.co/600x400/111/ff00ff?text=HORROR+GAME" alt="Horror Game Screenshot">
-                    <h3 style="color: var(--neon-pink)">Horror Game</h3>
-                    <p>A spooky interactive experience built for the brave.</p>
-                    <br>
-                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem;">PLAY NOW</a>
-                </article>
-
-                <!-- Project 2: Study App -->
-                <article class="quest-card">
-                    <span class="quest-tag">[UTILITY]</span>
-                    <img src="https://placehold.co/600x400/111/00f3ff?text=STUDY+APP" alt="Study App Screenshot">
-                    <h3 style="color: var(--neon-cyan)">Study App</h3>
-                    <p>Boost your productivity with this focused study tool.</p>
-                    <br>
-                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem;">LAUNCH APP</a>
-                </article>
-
-                <!-- Project 3: Original Portfolio -->
-                <article class="quest-card">
-                    <span class="quest-tag">[COMPLETED]</span>
-                    <img src="https://placehold.co/600x400/111/0aff00?text=PORTFOLIO+V1" alt="Portfolio Website">
-                    <h3 style="color: var(--neon-green)">Cyber Portfolio</h3>
-                    <p>This very website! A gamified approach to personal branding.</p>
-                    <br>
-                    <a href="#" class="btn-cyber" style="font-size: 0.6rem; padding: 0.5rem 1rem; opacity: 0.5; cursor: not-allowed;">VIEW SOURCE</a>
-                </article>
-
-            </div>
-        </section>
-
-        <!-- Class Abilities (Services) -->
-        <section id="abilities">
-            <h2 class="section-title">CLASS ABILITIES</h2>
-            <ul style="list-style: square inside; font-size: 1.5rem; color: #ccc;">
-                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Frontend Development (HTML/CSS/JS)</li>
-                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> UI/UX Design & Prototyping</li>
-                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Interactive Web Experiences</li>
-                <li style="margin-bottom: 10px;"><span style="color: var(--neon-cyan)">></span> Responsive Layouts</li>
-            </ul>
-        </section>
-
-        <!-- Skill Tree -->
-        <section id="skills">
-            <h2 class="section-title">SKILL TREE</h2>
-            <div class="skill-tree">
-                <div class="skill-node">JavaScript</div>
-                <div class="skill-node">React</div>
-                <div class="skill-node">CSS3</div>
-                <div class="skill-node">HTML5</div>
-                <div class="skill-node">Git</div>
-                <div class="skill-node">Figma</div>
-                <div class="skill-node">Node.js</div>
-                <div class="skill-node">Three.js</div>
-                <div class="skill-node">Canvas API</div>
-            </div>
-        </section>
-
-        <!-- Contact / Final Boss -->
-        <section id="contact" style="text-align: center; border: 2px solid var(--neon-pink); padding: 3rem; background: rgba(255, 0, 255, 0.05); box-shadow: 0 0 30px rgba(255, 0, 255, 0.1);">
-            <h2 style="color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); margin-bottom: 1rem;">CHALLENGE THE FINAL BOSS?</h2>
-            <p style="margin-bottom: 2rem; font-size: 1.4rem;">Ready to start a new quest together? Send a transmission.</p>
-            <a href="mailto:your-email@example.com" class="btn-cyber">SEND MESSAGE</a>
-        </section>
-
     </div>
 
-    <footer>
-        <p>© 2024 LVL 5 FREELANCER. ALL RIGHTS RESERVED.</p>
-        <p style="color: var(--neon-green); margin-top: 10px;">SYSTEM ONLINE... PRESS START TO CONTINUE...</p>
-    </footer>
+    <div class="loadout-screen" id="loadoutScreen">
+        <div class="loadout-content">
+            <h1 class="loadout-title">LOADOUT // PLAYER PROFILE</h1>
+            
+            <div class="about-section">
+                <h2>// ABOUT ME</h2>
+                <p>I'm a Web Developer and AI enthusiast pushing for the top tier.</p>
+            </div>
 
-    <!-- Mini Game Script -->
+            <div class="projects-section">
+                <h2>// MY PROJECTS</h2>
+                
+                <div class="project-card">
+                    <h3>Horror Game</h3>
+                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank">PLAY NOW</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>Study App</h3>
+                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank">OPEN APP</a>
+                </div>
+
+                <div class="project-card">
+                    <h3>AI Agents Intensive</h3>
+                    <a href="#" style="opacity: 0.5; cursor: default;">COMING SOON</a>
+                </div>
+            </div>
+
+            <button class="back-btn" onclick="backToMenu()">BACK TO MAIN MENU</button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="contactModal">
+        <div class="contact-modal">
+            <h2>CONTACT</h2>
+            <a href="https://instagram.com/ae9sj" target="_blank" class="contact-link">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                </svg>
+                @ae9sj
+            </a>
+            <button class="close-btn" onclick="closeContact()">CLOSE</button>
+        </div>
+    </div>
+
     <script>
-        const canvas = document.getElementById('miniGame');
+        function createParticles() {
+            const container = document.getElementById('bgParticles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        const canvas = document.getElementById('gameCanvas');
         const ctx = canvas.getContext('2d');
-        const scoreEl = document.getElementById('gameScore');
-        
-        let gameRunning = false;
-        let score = 0;
-        let player = { x: 400, y: 250, w: 30, h: 30, speed: 5, dx: 0 };
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            canvas.width = container.clientWidth * 0.9;
+            canvas.height = container.clientHeight * 0.7;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        let gameRunning = true;
+        let player = {
+            x: 50,
+            y: 0,
+            width: 40,
+            height: 40,
+            velocityY: 0,
+            gravity: 0.8,
+            jumpForce: -15,
+            grounded: false
+        };
+
         let obstacles = [];
+        let score = 0;
         let frameCount = 0;
-        let animationId;
+        let gameSpeed = 5;
 
-        // Input Handling
+        player.y = canvas.height - player.height;
+
+        function jump() {
+            if (player.grounded) {
+                player.velocityY = player.jumpForce;
+                player.grounded = false;
+            }
+        }
+
         document.addEventListener('keydown', (e) => {
-            if (e.code === 'Space' && !gameRunning) {
-                startGame();
-            }
-            if (e.code === 'ArrowRight') player.dx = player.speed;
-            if (e.code === 'ArrowLeft') player.dx = -player.speed;
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (e.code === 'ArrowRight' || e.code === 'ArrowLeft') {
-                player.dx = 0;
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (gameRunning) jump();
             }
         });
 
-        function startGame() {
-            gameRunning = true;
-            score = 0;
-            obstacles = [];
-            player.x = canvas.width / 2 - 15;
-            frameCount = 0;
-            scoreEl.innerText = "SCORE: 0 | PLAYING...";
-            if (animationId) cancelAnimationFrame(animationId);
-            update();
-        }
+        canvas.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            if (gameRunning) jump();
+        });
 
-        function drawPlayer() {
-            ctx.fillStyle = '#00f3ff';
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#00f3ff';
-            ctx.fillRect(player.x, player.y, player.w, player.h);
-            ctx.shadowBlur = 0;
-        }
+        canvas.addEventListener('click', () => {
+            if (gameRunning) jump();
+        });
 
-        function drawObstacles() {
-            ctx.fillStyle = '#ff00ff';
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = '#ff00ff';
-            obstacles.forEach(obs => {
-                ctx.fillRect(obs.x, obs.y, obs.w, obs.h);
+        function spawnObstacle() {
+            const height = Math.random() * 60 + 40;
+            obstacles.push({
+                x: canvas.width,
+                y: canvas.height - height,
+                width: 30,
+                height: height
             });
-            ctx.shadowBlur = 0;
         }
 
-        function update() {
+        function updateGame() {
             if (!gameRunning) return;
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-            // Move Player
-            player.x += player.dx;
-            // Boundary Check
-            if (player.x < 0) player.x = 0;
-            if (player.x + player.w > canvas.width) player.x = canvas.width - player.w;
+            ctx.fillStyle = '#1a2332';
+            ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
 
-            // Spawn Obstacles
+            player.velocityY += player.gravity;
+            player.y += player.velocityY;
+
+            if (player.y >= canvas.height - player.height) {
+                player.y = canvas.height - player.height;
+                player.velocityY = 0;
+                player.grounded = true;
+            }
+
+            ctx.shadowBlur = 20;
+            ctx.shadowColor = '#00ffff';
+            ctx.fillStyle = '#00ffff';
+            ctx.fillRect(player.x, player.y, player.width, player.height);
+            ctx.shadowBlur = 0;
+
             frameCount++;
-            if (frameCount % 40 === 0) { // Spawn rate
-                let size = Math.random() * 30 + 20;
-                obstacles.push({
-                    x: Math.random() * (canvas.width - size),
-                    y: -50,
-                    w: size,
-                    h: size,
-                    speed: 3 + (score * 0.1) // Get faster as score increases
-                });
+            if (frameCount % 90 === 0) {
+                spawnObstacle();
+                score++;
+                if (score % 5 === 0) gameSpeed += 0.5;
             }
 
-            // Move & Draw Obstacles
-            for (let i = 0; i < obstacles.length; i++) {
+            ctx.shadowBlur = 15;
+            ctx.shadowColor = '#dc143c';
+            ctx.fillStyle = '#dc143c';
+
+            for (let i = obstacles.length - 1; i >= 0; i--) {
                 let obs = obstacles[i];
-                obs.y += obs.speed;
-                
-                // Collision Detection
+                obs.x -= gameSpeed;
+
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
                 if (
-                    player.x < obs.x + obs.w &&
-                    player.x + player.w > obs.x &&
-                    player.y < obs.y + obs.h &&
-                    player.y + player.h > obs.y
+                    player.x < obs.x + obs.width &&
+                    player.x + player.width > obs.x &&
+                    player.y < obs.y + obs.height &&
+                    player.y + player.height > obs.y
                 ) {
-                    gameOver();
-                    return;
+                    obstacles = [];
+                    score = 0;
+                    gameSpeed = 5;
+                    frameCount = 0;
                 }
 
-                // Remove off-screen obstacles and increase score
-                if (obs.y > canvas.height) {
+                if (obs.x + obs.width < 0) {
                     obstacles.splice(i, 1);
-                    score++;
-                    i--;
                 }
             }
+            ctx.shadowBlur = 0;
 
-            drawPlayer();
-            drawObstacles();
-
-            scoreEl.innerText = `SCORE: ${score} | PLAYING...`;
-            animationId = requestAnimationFrame(update);
-        }
-
-        function gameOver() {
-            gameRunning = false;
-            ctx.fillStyle = 'rgba(0,0,0,0.7)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
-            ctx.fillStyle = '#ff0000';
-            ctx.font = '20px "Press Start 2P"';
-            ctx.textAlign = 'center';
-            ctx.fillText("GAME OVER", canvas.width/2, canvas.height/2 - 20);
-            
             ctx.fillStyle = '#fff';
-            ctx.font = '12px "VT323"';
-            ctx.fillText(`FINAL SCORE: ${score}`, canvas.width/2, canvas.height/2 + 10);
-            ctx.fillText("PRESS SPACE TO RESTART", canvas.width/2, canvas.height/2 + 40);
-            
-            scoreEl.innerText = `GAME OVER | SCORE: ${score} | PRESS SPACE TO RESTART`;
+            ctx.font = '20px Russo One';
+            ctx.fillText('SCORE: ' + score, 20, 30);
+
+            requestAnimationFrame(updateGame);
         }
 
-        // Initial Draw
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#0aff00';
-        ctx.font = '14px "VT323"';
-        ctx.textAlign = 'center';
-        ctx.fillText("PRESS SPACE TO START GAME", canvas.width/2, canvas.height/2);
+        updateGame();
+
+        function showLoadout() {
+            document.getElementById('mainContainer').classList.add('fade-out');
+            setTimeout(() => {
+                document.getElementById('loadoutScreen').classList.add('active');
+            }, 500);
+        }
+
+        function backToMenu() {
+            document.getElementById('loadoutScreen').classList.remove('active');
+            setTimeout(() => {
+                document.getElementById('mainContainer').classList.remove('fade-out');
+            }, 500);
+        }
+
+        function showContact() {
+            document.getElementById('contactModal').classList.add('active');
+        }
+
+        function closeContact() {
+            document.getElementById('contactModal').classList.remove('active');
+        }
+
+        document.getElementById('contactModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('contactModal')) {
+                closeContact();
+            }
+        });
     </script>
 </body>
 </html>
