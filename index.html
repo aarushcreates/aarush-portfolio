@@ -3,7 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aarush - Portfolio</title>
+    <title>AARUSH | Devil May Cry Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,142 +14,159 @@
             box-sizing: border-box;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Russo+One&display=swap');
-
         body {
-            font-family: 'Russo One', sans-serif;
+            font-family: 'Teko', sans-serif;
             overflow: hidden;
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 50%, #0d1117 100%);
-            min-height: 100vh;
+            background: #0a0a0f;
             color: #fff;
+            height: 100vh;
+            width: 100vw;
         }
 
-        .bg-particles {
+        /* Cinematic Background */
+        .background-container {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            z-index: -3;
+            background: 
+                linear-gradient(rgba(10, 10, 15, 0.7), rgba(5, 5, 10, 0.9)),
+                url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=1920&q=80') center/cover no-repeat;
+            filter: contrast(1.2) brightness(0.6);
+        }
+
+        /* Particle Canvas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
             pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
         }
 
-        .particle {
-            position: absolute;
-            width: 3px;
-            height: 3px;
-            background: rgba(100, 200, 255, 0.3);
-            border-radius: 50%;
-            animation: float 15s infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
+        /* Main Container */
         .main-container {
             display: flex;
             height: 100vh;
+            width: 100vw;
             position: relative;
             z-index: 1;
         }
 
-        .left-side {
+        /* Left Side - Menu */
+        .left-panel {
             width: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: flex-start;
-            padding-left: 80px;
-            background: linear-gradient(90deg, rgba(10, 14, 26, 0.9) 0%, rgba(10, 14, 26, 0.7) 100%);
+            padding-left: 8vw;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 100%);
             position: relative;
         }
 
-        .logo-container {
+        /* AARUSH Title - AAA Metallic Style */
+        .title-container {
             margin-bottom: 60px;
             position: relative;
         }
 
-        .logo {
-            font-family: 'Metal Mania', cursive;
-            font-size: 5rem;
-            text-transform: uppercase;
+        .aarush-title {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(4rem, 8vw, 10rem);
+            font-weight: 900;
             letter-spacing: 8px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .logo-text {
-            background: linear-gradient(180deg, #e8e8e8 0%, #a0a0a0 30%, #606060 60%, #404040 100%);
+            text-transform: uppercase;
+            background: linear-gradient(
+                135deg,
+                #e8e8e8 0%,
+                #ffffff 20%,
+                #c0c0c0 40%,
+                #ffffff 50%,
+                #a0a0a0 60%,
+                #d0d0d0 80%,
+                #f0f0f0 100%
+            );
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            animation: metallicShimmer 3s ease-in-out infinite;
             position: relative;
-            z-index: 2;
+            filter: drop-shadow(0 0 10px rgba(255, 0, 50, 0.8))
+                    drop-shadow(0 0 20px rgba(0, 255, 255, 0.6))
+                    drop-shadow(2px 2px 0px rgba(255, 0, 50, 0.9))
+                    drop-shadow(-2px -2px 0px rgba(0, 255, 255, 0.7));
         }
 
-        .logo::before {
-            content: '';
+        .aarush-title::before {
+            content: 'AARUSH';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 80%;
-            background: radial-gradient(ellipse at center, rgba(220, 20, 60, 0.4) 0%, transparent 70%);
-            z-index: 1;
-            filter: blur(20px);
-        }
-
-        .logo::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 140%;
+            top: 0;
+            left: 0;
+            width: 100%;
             height: 100%;
-            background: radial-gradient(ellipse at center, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
-            z-index: 0;
-            filter: blur(30px);
+            background: linear-gradient(
+                45deg,
+                transparent 40%,
+                rgba(255, 0, 50, 0.3) 50%,
+                transparent 60%
+            );
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glareEffect 4s ease-in-out infinite;
+            pointer-events: none;
         }
 
+        @keyframes metallicShimmer {
+            0%, 100% { background-position: 0% center; }
+            50% { background-position: 100% center; }
+        }
+
+        @keyframes glareEffect {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Wing Effects */
         .wing-effect {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 200px;
-            height: 100px;
-            z-index: 0;
+            width: 120%;
+            height: 200%;
+            pointer-events: none;
+            z-index: -1;
         }
 
         .wing-left {
             position: absolute;
-            left: -80px;
-            top: 20px;
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(135deg, rgba(220, 20, 60, 0.6) 0%, rgba(0, 255, 255, 0.4) 100%);
-            clip-path: polygon(0 50%, 100% 0, 80% 50%, 100% 100%);
-            filter: blur(10px);
+            left: -60%;
+            top: 20%;
+            width: 80px;
+            height: 200px;
+            background: linear-gradient(135deg, rgba(255, 0, 50, 0.6), transparent 70%);
+            clip-path: polygon(0 50%, 100% 0, 80% 100%);
+            filter: blur(8px);
             animation: wingPulse 2s ease-in-out infinite;
         }
 
         .wing-right {
             position: absolute;
-            right: -80px;
-            top: 20px;
-            width: 100px;
-            height: 60px;
-            background: linear-gradient(225deg, rgba(220, 20, 60, 0.6) 0%, rgba(0, 255, 255, 0.4) 100%);
-            clip-path: polygon(0 0, 100% 50%, 20% 50%, 0 100%);
-            filter: blur(10px);
+            right: -60%;
+            top: 20%;
+            width: 80px;
+            height: 200px;
+            background: linear-gradient(225deg, rgba(0, 255, 255, 0.6), transparent 70%);
+            clip-path: polygon(0 0, 100% 50%, 20% 100%);
+            filter: blur(8px);
             animation: wingPulse 2s ease-in-out infinite reverse;
         }
 
@@ -155,6 +175,7 @@
             50% { opacity: 1; transform: scaleY(1.1); }
         }
 
+        /* Menu Buttons */
         .menu-buttons {
             display: flex;
             flex-direction: column;
@@ -162,587 +183,741 @@
         }
 
         .menu-btn {
-            font-family: 'Russo One', sans-serif;
-            font-size: 2rem;
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(2rem, 3.5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
             color: #fff;
             background: transparent;
             border: none;
             cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            padding: 15px 40px;
             position: relative;
-            transition: all 0.3s ease;
-            text-align: left;
+            padding: 10px 30px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
         .menu-btn::before {
             content: '';
             position: absolute;
+            bottom: 0;
             left: 0;
-            top: 50%;
-            transform: translateY(-50%);
             width: 0;
             height: 3px;
-            background: linear-gradient(90deg, #dc143c, #00ffff);
-            transition: width 0.3s ease;
+            background: linear-gradient(90deg, #ff0032, #00ffff);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .menu-btn::after {
             content: '';
             position: absolute;
+            top: 0;
             right: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #00ffff, #ff0032);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .menu-btn:hover {
-            color: #00ffff;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
-            padding-left: 50px;
+            transform: scale(1.08) translateX(15px);
+            text-shadow: 
+                0 0 20px rgba(255, 0, 50, 0.9),
+                0 0 40px rgba(0, 255, 255, 0.7),
+                3px 0 0 rgba(255, 0, 50, 1),
+                -3px 0 0 rgba(0, 255, 255, 1);
+            letter-spacing: 6px;
         }
 
-        .menu-btn:hover::before {
+        .menu-btn:hover::before,
+        .menu-btn:hover::after {
             width: 100%;
         }
 
-        .menu-btn:hover::after {
-            transform: scaleX(1);
-        }
-
-        .right-side {
+        /* Right Side - Mini Game */
+        .right-panel {
             width: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(90deg, rgba(10, 14, 26, 0.7) 0%, rgba(10, 14, 26, 0.9) 100%);
             position: relative;
+            background: linear-gradient(90deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
             overflow: hidden;
         }
 
-        #gameCanvas {
-            border: 3px solid rgba(0, 255, 255, 0.3);
-            background: linear-gradient(180deg, #0a0e1a 0%, #1a2332 100%);
-            box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+        #game-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
-        .game-instructions {
+        .game-overlay {
             position: absolute;
-            bottom: 20px;
-            right: 20px;
-            font-size: 0.8rem;
-            color: rgba(255, 255, 255, 0.5);
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
             text-align: right;
+            pointer-events: none;
         }
 
+        .game-overlay span {
+            display: block;
+            margin-top: 5px;
+        }
+
+        /* Loadout Screen */
         .loadout-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f2e 100%);
+            background: rgba(5, 5, 10, 0.98);
             z-index: 100;
-            display: none;
-            opacity: 0;
             transform: translateX(100%);
-            transition: all 0.5s ease;
-            overflow-y: auto;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .loadout-screen.active {
-            display: block;
-            opacity: 1;
             transform: translateX(0);
         }
 
         .loadout-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 60px 40px;
+            max-width: 800px;
+            padding: 40px;
+            text-align: center;
         }
 
         .loadout-title {
-            font-family: 'Metal Mania', cursive;
-            font-size: 3.5rem;
-            text-align: center;
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: #fff;
             margin-bottom: 40px;
-            background: linear-gradient(180deg, #e8e8e8 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 0, 50, 0.8);
+            letter-spacing: 4px;
         }
 
         .about-section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.2);
-            padding: 30px;
-            margin-bottom: 40px;
-            border-radius: 5px;
+            margin-bottom: 50px;
         }
 
-        .about-section h2 {
-            font-size: 1.8rem;
-            color: #00ffff;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-        }
-
-        .about-section p {
-            font-size: 1.1rem;
+        .about-text {
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             line-height: 1.8;
-            color: rgba(255, 255, 255, 0.9);
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .projects-section {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
 
-        .projects-section h2 {
-            font-size: 1.8rem;
-            color: #dc143c;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            letter-spacing: 3px;
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
         }
 
-        .project-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(220, 20, 60, 0.3);
-            padding: 25px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            transition: all 0.3s ease;
-        }
-
-        .project-card:hover {
-            border-color: #dc143c;
-            box-shadow: 0 0 20px rgba(220, 20, 60, 0.3);
-            transform: translateX(10px);
-        }
-
-        .project-card h3 {
-            font-size: 1.4rem;
-            color: #fff;
-            margin-bottom: 10px;
-            text-transform: uppercase;
-        }
-
-        .project-card a {
-            display: inline-block;
+        .project-link {
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
             color: #00ffff;
             text-decoration: none;
-            font-size: 1rem;
-            padding: 8px 20px;
-            border: 1px solid #00ffff;
-            border-radius: 3px;
+            padding: 15px 40px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.05);
             transition: all 0.3s ease;
-            text-transform: uppercase;
             letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
         }
 
-        .project-card a:hover {
-            background: #00ffff;
-            color: #0a0e1a;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .project-link:hover {
+            border-color: #ff0032;
+            background: rgba(255, 0, 50, 0.1);
+            color: #ff0032;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4);
+        }
+
+        .project-link:hover::before {
+            left: 100%;
         }
 
         .back-btn {
-            font-family: 'Russo One', sans-serif;
-            font-size: 1.3rem;
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
             color: #fff;
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 3px;
             padding: 15px 50px;
-            display: block;
-            margin: 40px auto 0;
+            cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: 3px;
+            text-transform: uppercase;
         }
 
         .back-btn:hover {
-            border-color: #dc143c;
-            color: #dc143c;
-            box-shadow: 0 0 20px rgba(220, 20, 60, 0.4);
+            border-color: #ff0032;
+            background: rgba(255, 0, 50, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 50, 0.5);
         }
 
+        /* Contact Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             z-index: 200;
-            display: none;
+            display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(5px);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
         }
 
         .modal-overlay.active {
-            display: flex;
+            opacity: 1;
+            visibility: visible;
         }
 
-        .contact-modal {
-            background: linear-gradient(135deg, rgba(10, 14, 26, 0.95) 0%, rgba(26, 31, 46, 0.95) 100%);
-            border: 2px solid rgba(220, 20, 60, 0.5);
-            padding: 50px;
-            border-radius: 10px;
+        .modal-content {
+            background: linear-gradient(135deg, rgba(20, 20, 30, 0.95), rgba(10, 10, 15, 0.98));
+            padding: 60px 80px;
+            border: 1px solid rgba(255, 0, 50, 0.3);
+            box-shadow: 
+                0 0 50px rgba(255, 0, 50, 0.3),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
             text-align: center;
-            box-shadow: 0 0 50px rgba(220, 20, 60, 0.3);
-            max-width: 400px;
-            width: 90%;
+            transform: scale(0.8);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
 
-        .contact-modal h2 {
-            font-family: 'Metal Mania', cursive;
-            font-size: 2.5rem;
-            color: #dc143c;
-            margin-bottom: 30px;
-            text-transform: uppercase;
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: clamp(2rem, 4vw, 3rem);
+            color: #ff0032;
+            margin-bottom: 40px;
+            text-shadow: 0 0 20px rgba(255, 0, 50, 0.8);
+            letter-spacing: 3px;
         }
 
         .contact-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            color: #fff;
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            color: #00ffff;
             text-decoration: none;
-            font-size: 1.3rem;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 5px;
-            margin-bottom: 30px;
+            display: inline-block;
+            padding: 15px 40px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.05);
             transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
         }
 
         .contact-link:hover {
-            background: rgba(0, 255, 255, 0.1);
-            border-color: #00ffff;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-
-        .contact-link svg {
-            width: 30px;
-            height: 30px;
-            fill: #dc143c;
+            border-color: #ff0032;
+            background: rgba(255, 0, 50, 0.1);
+            color: #ff0032;
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4);
         }
 
         .close-btn {
-            font-family: 'Russo One', sans-serif;
-            font-size: 1.2rem;
+            font-family: 'Teko', sans-serif;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
             color: #fff;
             background: transparent;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 3px;
             padding: 12px 40px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            letter-spacing: 2px;
+            text-transform: uppercase;
         }
 
         .close-btn:hover {
-            border-color: #dc143c;
-            color: #dc143c;
+            border-color: #ff0032;
+            background: rgba(255, 0, 50, 0.2);
+            box-shadow: 0 0 20px rgba(255, 0, 50, 0.5);
         }
 
-        .fade-out {
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .main-container {
                 flex-direction: column;
             }
 
-            .left-side, .right-side {
+            .left-panel,
+            .right-panel {
                 width: 100%;
                 height: 50vh;
             }
 
-            .left-side {
-                padding-left: 30px;
-                justify-content: flex-start;
-                padding-top: 40px;
+            .left-panel {
+                padding-left: 5vw;
+                justify-content: center;
             }
 
-            .logo {
-                font-size: 3.5rem;
+            .title-container {
+                margin-bottom: 30px;
             }
 
-            .menu-btn {
-                font-size: 1.5rem;
-                padding: 10px 30px;
+            .menu-buttons {
+                gap: 15px;
             }
 
-            #gameCanvas {
-                width: 90%;
-                height: 70%;
+            .game-overlay {
+                bottom: 15px;
+                right: 15px;
+                font-size: 0.9rem;
             }
 
-            .game-instructions {
-                font-size: 0.6rem;
-                bottom: 10px;
-                right: 10px;
+            .modal-content {
+                padding: 40px 30px;
+                margin: 20px;
             }
+        }
 
-            .loadout-content {
-                padding: 30px 20px;
-            }
+        /* Scanlines Effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            opacity: 0.3;
+        }
 
-            .loadout-title {
-                font-size: 2.5rem;
-            }
-
-            .contact-modal {
-                padding: 30px 20px;
-            }
+        /* Vignette */
+        .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.6) 100%);
         }
     </style>
 </head>
 <body>
-    <div class="bg-particles" id="bgParticles"></div>
+    <!-- Background Elements -->
+    <div class="background-container"></div>
+    <canvas id="particle-canvas"></canvas>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
 
-    <div class="main-container" id="mainContainer">
-        <div class="left-side">
-            <div class="logo-container">
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Panel - Menu -->
+        <div class="left-panel">
+            <div class="title-container">
                 <div class="wing-effect">
                     <div class="wing-left"></div>
                     <div class="wing-right"></div>
                 </div>
-                <h1 class="logo">
-                    <span class="logo-text">AARUSH</span>
-                </h1>
+                <h1 class="aarush-title">AARUSH</h1>
             </div>
             <div class="menu-buttons">
-                <button class="menu-btn" onclick="showLoadout()">START</button>
-                <button class="menu-btn" onclick="showContact()">CONTACT</button>
+                <button class="menu-btn" onclick="openLoadout()">START</button>
+                <button class="menu-btn" onclick="openContact()">CONTACT</button>
             </div>
         </div>
 
-        <div class="right-side">
-            <canvas id="gameCanvas"></canvas>
-            <div class="game-instructions">
-                TAP or SPACE to Jump
+        <!-- Right Panel - Mini Game -->
+        <div class="right-panel">
+            <canvas id="game-canvas"></canvas>
+            <div class="game-overlay">
+                TAP / SPACEBAR TO JUMP
+                <span>AVOID THE SPIKES</span>
             </div>
         </div>
     </div>
 
+    <!-- Loadout Screen -->
     <div class="loadout-screen" id="loadoutScreen">
         <div class="loadout-content">
-            <h1 class="loadout-title">LOADOUT // PLAYER PROFILE</h1>
-            
+            <h2 class="loadout-title">LOADOUT // PROFILE</h2>
             <div class="about-section">
-                <h2>// ABOUT ME</h2>
-                <p>I'm a Web Developer and AI enthusiast pushing for the top tier.</p>
+                <p class="about-text">
+                    I'm a Web Developer and AI enthusiast pushing for the top tier.
+                </p>
             </div>
-
             <div class="projects-section">
-                <h2>// MY PROJECTS</h2>
-                
-                <div class="project-card">
-                    <h3>Horror Game</h3>
-                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank">PLAY NOW</a>
-                </div>
-
-                <div class="project-card">
-                    <h3>Study App</h3>
-                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank">OPEN APP</a>
-                </div>
-
-                <div class="project-card">
-                    <h3>AI Agents Intensive</h3>
-                    <a href="#" style="opacity: 0.5; cursor: default;">COMING SOON</a>
+                <h3 style="font-family: 'Cinzel Decorative'; font-size: 1.8rem; color: #ff0032; margin-bottom: 25px; letter-spacing: 2px;">MY PROJECTS</h3>
+                <div class="project-links">
+                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="project-link">Horror Game</a>
+                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="project-link">Study App</a>
+                    <a href="#" class="project-link">AI Agents Intensive</a>
                 </div>
             </div>
-
-            <button class="back-btn" onclick="backToMenu()">BACK TO MAIN MENU</button>
+            <button class="back-btn" onclick="closeLoadout()">BACK TO MAIN MENU</button>
         </div>
     </div>
 
+    <!-- Contact Modal -->
     <div class="modal-overlay" id="contactModal">
-        <div class="contact-modal">
-            <h2>CONTACT</h2>
+        <div class="modal-content">
+            <h2 class="modal-title">CONTACT</h2>
             <a href="https://instagram.com/ae9sj" target="_blank" class="contact-link">
-                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-                </svg>
-                @ae9sj
+                INSTAGRAM: @ae9sj
             </a>
+            <br>
             <button class="close-btn" onclick="closeContact()">CLOSE</button>
         </div>
     </div>
 
     <script>
-        function createParticles() {
-            const container = document.getElementById('bgParticles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                container.appendChild(particle);
+        // Particle System - Glowing Embers/Ash
+        const particleCanvas = document.getElementById('particle-canvas');
+        const particleCtx = particleCanvas.getContext('2d');
+
+        let particles = [];
+        const particleCount = 150;
+
+        function resizeParticleCanvas() {
+            particleCanvas.width = window.innerWidth;
+            particleCanvas.height = window.innerHeight;
+        }
+
+        resizeParticleCanvas();
+        window.addEventListener('resize', resizeParticleCanvas);
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+
+            reset() {
+                this.x = Math.random() * particleCanvas.width;
+                this.y = particleCanvas.height + Math.random() * 100;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.5;
+                this.opacity = Math.random() * 0.6 + 0.2;
+                this.hue = Math.random() > 0.7 ? 0 : Math.random() * 30 + 345;
+                this.saturation = Math.random() * 40 + 60;
+                this.lightness = Math.random() * 30 + 50;
+            }
+
+            update() {
+                this.y -= this.speedY;
+                this.x += this.speedX;
+                this.opacity -= 0.002;
+
+                if (this.y < -50 || this.opacity <= 0) {
+                    this.reset();
+                }
+            }
+
+            draw() {
+                particleCtx.beginPath();
+                particleCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                particleCtx.fillStyle = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, ${this.opacity})`;
+                particleCtx.shadowBlur = 15;
+                particleCtx.shadowColor = `hsla(${this.hue}, ${this.saturation}%, ${this.lightness}%, 0.8)`;
+                particleCtx.fill();
             }
         }
-        createParticles();
 
-        const canvas = document.getElementById('gameCanvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            const container = canvas.parentElement;
-            canvas.width = container.clientWidth * 0.9;
-            canvas.height = container.clientHeight * 0.7;
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
         }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
 
-        let gameRunning = true;
-        let player = {
-            x: 50,
-            y: 0,
-            width: 40,
-            height: 40,
-            velocityY: 0,
-            gravity: 0.8,
-            jumpForce: -15,
-            grounded: false
-        };
+        function animateParticles() {
+            particleCtx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
 
-        let obstacles = [];
-        let score = 0;
-        let frameCount = 0;
-        let gameSpeed = 5;
+            requestAnimationFrame(animateParticles);
+        }
 
-        player.y = canvas.height - player.height;
+        animateParticles();
 
-        function jump() {
-            if (player.grounded) {
-                player.velocityY = player.jumpForce;
-                player.grounded = false;
+        // Mini Game - Enhanced Graphics
+        const gameCanvas = document.getElementById('game-canvas');
+        const gameCtx = gameCanvas.getContext('2d');
+
+        let gameWidth, gameHeight;
+        let player, obstacles, gameRunning, score, animationId;
+
+        function resizeGameCanvas() {
+            const rect = gameCanvas.parentElement.getBoundingClientRect();
+            gameCanvas.width = rect.width;
+            gameCanvas.height = rect.height;
+            gameWidth = gameCanvas.width;
+            gameHeight = gameCanvas.height;
+        }
+
+        resizeGameCanvas();
+        window.addEventListener('resize', resizeGameCanvas);
+
+        class Player {
+            constructor() {
+                this.width = 40;
+                this.height = 60;
+                this.x = 80;
+                this.y = gameHeight - this.height - 20;
+                this.velocityY = 0;
+                this.gravity = 0.8;
+                this.jumpPower = -18;
+                this.isJumping = false;
+                this.rotation = 0;
+            }
+
+            jump() {
+                if (!this.isJumping) {
+                    this.velocityY = this.jumpPower;
+                    this.isJumping = true;
+                }
+            }
+
+            update() {
+                this.velocityY += this.gravity;
+                this.y += this.velocityY;
+
+                if (this.y >= gameHeight - this.height - 20) {
+                    this.y = gameHeight - this.height - 20;
+                    this.velocityY = 0;
+                    this.isJumping = false;
+                    this.rotation = 0;
+                } else {
+                    this.rotation = Math.min(Math.max(this.velocityY * 2, -30), 30);
+                }
+            }
+
+            draw() {
+                gameCtx.save();
+                gameCtx.translate(this.x + this.width / 2, this.y + this.height / 2);
+                gameCtx.rotate(this.rotation * Math.PI / 180);
+
+                const gradient = gameCtx.createLinearGradient(-this.width/2, -this.height/2, this.width/2, this.height/2);
+                gradient.addColorStop(0, '#00ffff');
+                gradient.addColorStop(0.5, '#ffffff');
+                gradient.addColorStop(1, '#00ffff');
+
+                gameCtx.fillStyle = gradient;
+                gameCtx.shadowBlur = 20;
+                gameCtx.shadowColor = '#00ffff';
+
+                gameCtx.beginPath();
+                gameCtx.moveTo(-this.width/2, this.height/2);
+                gameCtx.lineTo(-this.width/4, -this.height/2);
+                gameCtx.lineTo(0, -this.height/2 - 15);
+                gameCtx.lineTo(this.width/4, -this.height/2);
+                gameCtx.lineTo(this.width/2, this.height/2);
+                gameCtx.lineTo(0, this.height/2 - 10);
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                gameCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                gameCtx.shadowBlur = 10;
+                gameCtx.beginPath();
+                gameCtx.moveTo(-this.width/6, this.height/4);
+                gameCtx.lineTo(0, -this.height/4);
+                gameCtx.lineTo(this.width/6, this.height/4);
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                gameCtx.restore();
+            }
+        }
+
+        class Obstacle {
+            constructor() {
+                this.width = Math.random() * 30 + 40;
+                this.height = Math.random() * 40 + 50;
+                this.x = gameWidth;
+                this.y = gameHeight - this.height - 20;
+                this.speed = 6 + Math.random() * 3;
+                this.spikeCount = Math.floor(this.width / 15);
+            }
+
+            update() {
+                this.x -= this.speed;
+            }
+
+            draw() {
+                gameCtx.save();
+                
+                const gradient = gameCtx.createLinearGradient(this.x, this.y, this.x, this.y + this.height);
+                gradient.addColorStop(0, '#2a2a3a');
+                gradient.addColorStop(0.5, '#1a1a2a');
+                gradient.addColorStop(1, '#0a0a1a');
+
+                gameCtx.fillStyle = gradient;
+                gameCtx.shadowBlur = 10;
+                gameCtx.shadowColor = '#ff0032';
+
+                gameCtx.beginPath();
+                gameCtx.moveTo(this.x, this.y + this.height);
+                
+                for (let i = 0; i <= this.spikeCount; i++) {
+                    const spikeX = this.x + (i * this.width / this.spikeCount);
+                    const spikeY = i % 2 === 0 ? this.y : this.y + this.height * 0.3;
+                    gameCtx.lineTo(spikeX, spikeY);
+                }
+
+                gameCtx.lineTo(this.x + this.width, this.y + this.height);
+                gameCtx.closePath();
+                gameCtx.fill();
+
+                gameCtx.strokeStyle = '#ff0032';
+                gameCtx.lineWidth = 2;
+                gameCtx.shadowBlur = 5;
+                gameCtx.stroke();
+
+                gameCtx.restore();
+            }
+        }
+
+        function initGame() {
+            player = new Player();
+            obstacles = [];
+            score = 0;
+            gameRunning = true;
+            spawnObstacle();
+            gameLoop();
+        }
+
+        function spawnObstacle() {
+            if (!gameRunning) return;
+            
+            obstacles.push(new Obstacle());
+            
+            const nextSpawn = 1500 + Math.random() * 1500;
+            setTimeout(spawnObstacle, nextSpawn);
+        }
+
+        function checkCollision(player, obstacle) {
+            const playerHitbox = {
+                x: player.x + 10,
+                y: player.y + 10,
+                width: player.width - 20,
+                height: player.height - 20
+            };
+
+            return playerHitbox.x < obstacle.x + obstacle.width &&
+                   playerHitbox.x + playerHitbox.width > obstacle.x &&
+                   playerHitbox.y < obstacle.y + obstacle.height &&
+                   playerHitbox.y + playerHitbox.height > obstacle.y;
+        }
+
+        function gameLoop() {
+            if (!gameRunning) return;
+
+            gameCtx.clearRect(0, 0, gameWidth, gameHeight);
+
+            gameCtx.strokeStyle = '#ff0032';
+            gameCtx.lineWidth = 2;
+            gameCtx.shadowBlur = 10;
+            gameCtx.shadowColor = '#ff0032';
+            gameCtx.beginPath();
+            gameCtx.moveTo(0, gameHeight - 20);
+            gameCtx.lineTo(gameWidth, gameHeight - 20);
+            gameCtx.stroke();
+
+            player.update();
+            player.draw();
+
+            obstacles.forEach((obstacle, index) => {
+                obstacle.update();
+                obstacle.draw();
+
+                if (checkCollision(player, obstacle)) {
+                    gameRunning = false;
+                    setTimeout(initGame, 1000);
+                }
+
+                if (obstacle.x + obstacle.width < 0) {
+                    obstacles.splice(index, 1);
+                    score++;
+                }
+            });
+
+            gameCtx.fillStyle = '#fff';
+            gameCtx.font = 'bold 24px Teko';
+            gameCtx.shadowBlur = 10;
+            gameCtx.shadowColor = '#00ffff';
+            gameCtx.fillText(`SCORE: ${score}`, gameWidth - 150, 40);
+
+            animationId = requestAnimationFrame(gameLoop);
+        }
+
+        function handleJump() {
+            if (player && !player.isJumping) {
+                player.jump();
             }
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 e.preventDefault();
-                if (gameRunning) jump();
+                handleJump();
             }
         });
 
-        canvas.addEventListener('touchstart', (e) => {
+        gameCanvas.addEventListener('touchstart', (e) => {
             e.preventDefault();
-            if (gameRunning) jump();
+            handleJump();
         });
 
-        canvas.addEventListener('click', () => {
-            if (gameRunning) jump();
+        gameCanvas.addEventListener('click', () => {
+            handleJump();
         });
 
-        function spawnObstacle() {
-            const height = Math.random() * 60 + 40;
-            obstacles.push({
-                x: canvas.width,
-                y: canvas.height - height,
-                width: 30,
-                height: height
-            });
+        initGame();
+
+        function openLoadout() {
+            document.getElementById('loadoutScreen').classList.add('active');
         }
 
-        function updateGame() {
-            if (!gameRunning) return;
-
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#1a2332';
-            ctx.fillRect(0, canvas.height - 5, canvas.width, 5);
-
-            player.velocityY += player.gravity;
-            player.y += player.velocityY;
-
-            if (player.y >= canvas.height - player.height) {
-                player.y = canvas.height - player.height;
-                player.velocityY = 0;
-                player.grounded = true;
-            }
-
-            ctx.shadowBlur = 20;
-            ctx.shadowColor = '#00ffff';
-            ctx.fillStyle = '#00ffff';
-            ctx.fillRect(player.x, player.y, player.width, player.height);
-            ctx.shadowBlur = 0;
-
-            frameCount++;
-            if (frameCount % 90 === 0) {
-                spawnObstacle();
-                score++;
-                if (score % 5 === 0) gameSpeed += 0.5;
-            }
-
-            ctx.shadowBlur = 15;
-            ctx.shadowColor = '#dc143c';
-            ctx.fillStyle = '#dc143c';
-
-            for (let i = obstacles.length - 1; i >= 0; i--) {
-                let obs = obstacles[i];
-                obs.x -= gameSpeed;
-
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
-
-                if (
-                    player.x < obs.x + obs.width &&
-                    player.x + player.width > obs.x &&
-                    player.y < obs.y + obs.height &&
-                    player.y + player.height > obs.y
-                ) {
-                    obstacles = [];
-                    score = 0;
-                    gameSpeed = 5;
-                    frameCount = 0;
-                }
-
-                if (obs.x + obs.width < 0) {
-                    obstacles.splice(i, 1);
-                }
-            }
-            ctx.shadowBlur = 0;
-
-            ctx.fillStyle = '#fff';
-            ctx.font = '20px Russo One';
-            ctx.fillText('SCORE: ' + score, 20, 30);
-
-            requestAnimationFrame(updateGame);
-        }
-
-        updateGame();
-
-        function showLoadout() {
-            document.getElementById('mainContainer').classList.add('fade-out');
-            setTimeout(() => {
-                document.getElementById('loadoutScreen').classList.add('active');
-            }, 500);
-        }
-
-        function backToMenu() {
+        function closeLoadout() {
             document.getElementById('loadoutScreen').classList.remove('active');
-            setTimeout(() => {
-                document.getElementById('mainContainer').classList.remove('fade-out');
-            }, 500);
         }
 
-        function showContact() {
+        function openContact() {
             document.getElementById('contactModal').classList.add('active');
         }
 
@@ -751,7 +926,7 @@
         }
 
         document.getElementById('contactModal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('contactModal')) {
+            if (e.target.id === 'contactModal') {
                 closeContact();
             }
         });
