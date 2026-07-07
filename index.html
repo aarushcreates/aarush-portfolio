@@ -32,9 +32,9 @@
             height: 100%;
             z-index: -3;
             background: 
-                linear-gradient(rgba(10, 10, 15, 0.7), rgba(5, 5, 10, 0.9)),
-                url('https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?w=1920&q=80') center/cover no-repeat;
-            filter: contrast(1.2) brightness(0.6);
+                linear-gradient(rgba(10, 10, 15, 0.8), rgba(5, 5, 10, 0.95)),
+                url('https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?w=1920&q=80') center/cover no-repeat;
+            filter: contrast(1.3) brightness(0.7);
         }
 
         /* Particle Canvas */
@@ -228,6 +228,16 @@
                 3px 0 0 rgba(255, 0, 50, 1),
                 -3px 0 0 rgba(0, 255, 255, 1);
             letter-spacing: 6px;
+            animation: textGlitch 0.2s infinite;
+        }
+
+        @keyframes textGlitch {
+            0% { text-shadow: 3px 0 0 rgba(255,0,50,1), -3px 0 0 rgba(0,255,255,1); }
+            20% { text-shadow: -3px 0 0 rgba(255,0,50,1), 3px 0 0 rgba(0,255,255,1); }
+            40% { text-shadow: 3px 0 0 rgba(255,0,50,1), -3px 0 0 rgba(0,255,255,1); }
+            60% { text-shadow: -3px 0 0 rgba(255,0,50,1), 3px 0 0 rgba(0,255,255,1); }
+            80% { text-shadow: 3px 0 0 rgba(255,0,50,1), -3px 0 0 rgba(0,255,255,1); }
+            100% { text-shadow: -3px 0 0 rgba(255,0,50,1), 3px 0 0 rgba(0,255,255,1); }
         }
 
         .menu-btn:hover::before,
@@ -361,6 +371,58 @@
             left: 100%;
         }
 
+        .project-image-links {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .project-image-link {
+            width: 250px;
+            height: 250px;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            background: rgba(0, 255, 255, 0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: block;
+        }
+
+        .project-image-link img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+
+        .project-image-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .project-image-link:hover {
+            border-color: #ff0032;
+            box-shadow: 0 0 30px rgba(255, 0, 50, 0.4);
+            transform: scale(1.05);
+        }
+
+        .project-image-link:hover::before {
+            left: 100%;
+        }
+
+        .project-image-link:hover img {
+            filter: brightness(1.2);
+        }
+
         .back-btn {
             font-family: 'Teko', sans-serif;
             font-size: clamp(1.5rem, 2.5vw, 2rem);
@@ -471,6 +533,13 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .project-image-links {
+                flex-direction: column;
+            }
+            .project-image-link {
+                width: 200px;
+                height: 200px;
+            }
             .main-container {
                 flex-direction: column;
             }
@@ -584,8 +653,14 @@
             <div class="projects-section">
                 <h3 style="font-family: 'Cinzel Decorative'; font-size: 1.8rem; color: #ff0032; margin-bottom: 25px; letter-spacing: 2px;">MY PROJECTS</h3>
                 <div class="project-links">
-                    <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="project-link">Horror Game</a>
-                    <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="project-link">Study App</a>
+                    <div class="project-image-links">
+                        <a href="https://thisgamemightbescaryoridk.netlify.app/" target="_blank" class="project-image-link" title="Horror Game">
+                            <img src="draught.png" alt="Horror Game">
+                        </a>
+                        <a href="https://orbit-477142372341.us-west1.run.app/" target="_blank" class="project-image-link" title="Study App">
+                            <img src="drowned.png" alt="Study App">
+                        </a>
+                    </div>
                     <a href="#" class="project-link">AI Agents Intensive</a>
                 </div>
             </div>
@@ -695,8 +770,8 @@
 
         class Player {
             constructor() {
-                this.width = 40;
-                this.height = 60;
+                this.width = 15;
+                this.height = 70;
                 this.x = 80;
                 this.y = gameHeight - this.height - 20;
                 this.velocityY = 0;
@@ -743,20 +818,19 @@
 
                 gameCtx.beginPath();
                 gameCtx.moveTo(-this.width/2, this.height/2);
-                gameCtx.lineTo(-this.width/4, -this.height/2);
-                gameCtx.lineTo(0, -this.height/2 - 15);
-                gameCtx.lineTo(this.width/4, -this.height/2);
+                gameCtx.lineTo(0, -this.height/2);
                 gameCtx.lineTo(this.width/2, this.height/2);
-                gameCtx.lineTo(0, this.height/2 - 10);
+                gameCtx.lineTo(0, this.height/2 - 20);
                 gameCtx.closePath();
                 gameCtx.fill();
 
-                gameCtx.fillStyle = 'rgba(255, 255, 255, 0.8)';
-                gameCtx.shadowBlur = 10;
+                gameCtx.fillStyle = '#fff';
+                gameCtx.shadowBlur = 30;
+                gameCtx.shadowColor = '#00ffff';
                 gameCtx.beginPath();
-                gameCtx.moveTo(-this.width/6, this.height/4);
-                gameCtx.lineTo(0, -this.height/4);
-                gameCtx.lineTo(this.width/6, this.height/4);
+                gameCtx.moveTo(0, -this.height/2 + 5);
+                gameCtx.lineTo(-2, this.height/4);
+                gameCtx.lineTo(2, this.height/4);
                 gameCtx.closePath();
                 gameCtx.fill();
 
